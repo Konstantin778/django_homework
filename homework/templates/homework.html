@@ -9,15 +9,5 @@
 </head>
 <body>
     <label>Мой результат: <b>{{ result }}</b></label><br>
-    <p> </p>
-
-    <form method="post">
-        {% csrf_token %}
-        <input name="string" placeholder="Введите строчку">
-        <button class="btn" type="submit">отправить</button>
-    </form><br>
-
-    <label>Введённая строка: {{ output }}</label>
-
 </body>
 </html>

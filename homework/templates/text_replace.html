@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Замена текста</title>
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        <input name="string" placeholder="Введите строчку"><br>
+        <p></p>
+        <input name="old_elem" placeholder="Выберите символ, который нужно заменить"><br>
+        <p></p>
+        <input name="new_elem" placeholder="Введите новый(е) символ(ы)"><br>
+        <p></p>
+        <button class="btn" type="submit">отправить</button>
+    </form><br>
+
+    <label>Видоизменённая строка: {{ output }}</label>
+
+</body>
+</html>
