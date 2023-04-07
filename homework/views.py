@@ -63,4 +63,3 @@ def text_replace(request):
     new_elem = dict(request.POST.items())['new_elem']
     output_data = input_data.replace(old_elem, new_elem)
     return render(request, 'text_replace.html', {'output': output_data})
-
