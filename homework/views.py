@@ -66,7 +66,13 @@ def text_replace(request):
         return render(request, 'text_replace.html', {'output': '-'})
     request_dict = dict(request.POST.items())
     input_data = request_dict['string']
-    old_elem = request_dict['old_elem']
-    new_elem = request_dict['new_elem']
-    output_data = input_data.replace(old_elem, new_elem)
-    return render(request, 'text_replace.html', {'output': output_data})
+
+    if 'text_replace' in request.POST:
+        old_elem = request_dict['old_elem']
+        new_elem = request_dict['new_elem']
+        output_data = input_data.replace(old_elem, new_elem)
+        return render(request, 'text_replace.html', {'output': output_data})
+
+    if 'space_delete' in request.POST:
+        output_data = ''.join(input_data.split())
+        return render(request, 'text_replace.html', {'output': output_data})
