@@ -24,6 +24,12 @@
         color: black;
         font-weight: bold;
     }
+
+    .btn {
+        margin-left: 10px;
+        color: white;
+        background-color: green;
+    }
 </style>
 
 <body>
@@ -36,7 +42,8 @@
         <p></p>
         <input name="new_elem" placeholder="Введите новый(е) символ(ы)">
         <p></p>
-        <button class="btn" type="submit">отправить</button>
+        <button class="btn" name="text_replace" type="submit">Заменить</button>
+        <button class="btn" name="space_delete" type="submit">Удалить все пробелы</button>
     </form><br>
 
     <textarea name="new_string" class="new_string" placeholder="{{ output }}" disabled></textarea>
