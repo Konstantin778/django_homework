@@ -7,19 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Замена текста</title>
 </head>
+
+<style>
+    textarea {
+        width: 500px;
+        height: 150px;
+    }
+
+    input {
+        width: 500px;
+    }
+    .new_string {
+        background: none;
+    }
+    .new_string::placeholder {
+        color: black;
+        font-weight: bold;
+    }
+</style>
+
 <body>
     <form method="post">
         {% csrf_token %}
-        <input name="string" placeholder="Введите строчку"><br>
+        <textarea name="string" placeholder="Введите строчку"></textarea>
+
         <p></p>
-        <input name="old_elem" placeholder="Выберите символ, который нужно заменить"><br>
+        <input name="old_elem" placeholder="Выберите символ, который нужно заменить">
         <p></p>
-        <input name="new_elem" placeholder="Введите новый(е) символ(ы)"><br>
+        <input name="new_elem" placeholder="Введите новый(е) символ(ы)">
         <p></p>
         <button class="btn" type="submit">отправить</button>
     </form><br>
 
-    <label>Видоизменённая строка: {{ output }}</label>
+    <textarea name="new_string" class="new_string" placeholder="{{ output }}" disabled></textarea>
 
 </body>
 </html>

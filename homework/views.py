@@ -5,7 +5,13 @@ def binary_sum(request):
     first = request_data['first']
     second = request_data['second']
     try:
-        result = int(first) + int(second)
+        diapason = [x for x in range(int(first), int(second) + 1)]
+        result = sum(diapason)
+        if result < 1:
+            return render(request,
+                          'homework.html',
+                          {'result': 'Второе число должно быть больше первого'}
+            )
     except Exception as e:
         return render(request,
                       'homework.html',
@@ -58,8 +64,9 @@ def toggle_case(request):
 def text_replace(request):
     if request.method == 'GET':
         return render(request, 'text_replace.html', {'output': '-'})
-    input_data = dict(request.POST.items())['string']
-    old_elem = dict(request.POST.items())['old_elem']
-    new_elem = dict(request.POST.items())['new_elem']
+    request_dict = dict(request.POST.items())
+    input_data = request_dict['string']
+    old_elem = request_dict['old_elem']
+    new_elem = request_dict['new_elem']
     output_data = input_data.replace(old_elem, new_elem)
     return render(request, 'text_replace.html', {'output': output_data})
