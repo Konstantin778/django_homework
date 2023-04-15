@@ -5,4 +5,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('todo/', include('todo_app.urls')),
     path('homework/', include('homework.urls')),
+    path('converter/', include('converter.urls'))
 ]
