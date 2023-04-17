@@ -1,6 +1,7 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.core.handlers.wsgi import WSGIRequest
+from django.core.validators import validate_email
 from django.shortcuts import render, redirect
 
 
@@ -30,15 +31,46 @@ def registration(request: WSGIRequest):
         password_confirm = request.POST['password_confirm']
         email = request.POST['email']
 
-        user = User.objects.filter(
-            username=username,
-            password=password
-        )
+        if password != password_confirm:
+            return render(request, 'registration.html', {
+                'error_message': 'Пароли не совпадают',
+            })
+
+        if User.objects.filter(username=username).exists():
+            return render(request, 'registration.html', {
+                'error_message': 'Пользователь с таким именем уже существует',
+            })
+
+        try:
+            validate_email(email)
+        except Exception as e:
+            return render(request, 'registration.html', {
+                'error_message': 'Некорректный email',
+            })
 
 
+        user = User()
+        user.username = username
+        user.password = password
+        user.email = email
+        try:
+            user.save()
+            login(request, user)
+        except Exception as e:
+            return render(request, 'registration.html', {
+                'error_message': 'Ошибка сервера',
+            })
+
+        return render(request, 'info.html', {
+                'content': 'Реистрация прошла успешно',
+            })
 
     return render(request, 'registration.html')
 
+
+def logout_view(request: WSGIRequest):
+    logout(request)
+    return redirect('login')
 def user_list(request: WSGIRequest):
     return render(request, 'user_list.html')
 
