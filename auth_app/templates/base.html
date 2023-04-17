@@ -7,7 +7,17 @@
     <link rel="stylesheet" type="text/css" href="{% static 'auth_app/style.css' %}">
 </head>
 <body>
-{# smth #}
+<nav>
+    <a class="logo" href="{% url 'todo_main' %}">Главная</a>
+    <ul>
+        ---{{ user.username }}---
+        {% if user.is_authentificated %}
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Войти</a></li>
+        {% endif %}
+    </ul>
+</nav>
 <main>
     {% block content %}
     {% endblock %}
