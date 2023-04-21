@@ -48,10 +48,9 @@ def registration(request: WSGIRequest):
                 'error_message': 'Некорректный email',
             })
 
-
         user = User()
         user.username = username
-        user.password = password
+        user.set_password(password)
         user.email = email
         try:
             user.save()
@@ -62,7 +61,7 @@ def registration(request: WSGIRequest):
             })
 
         return render(request, 'info.html', {
-                'content': 'Реистрация прошла успешно',
+                'content': 'Регистрация прошла успешно',
             })
 
     return render(request, 'registration.html')
@@ -71,7 +70,21 @@ def registration(request: WSGIRequest):
 def logout_view(request: WSGIRequest):
     logout(request)
     return redirect('login')
+
+
 def user_list(request: WSGIRequest):
-    return render(request, 'user_list.html')
+    if not request.user.is_superuser:
+        return render(request, 'info.html', {
+            'content': 'Недостаточно прав для просмотра этой страницы',
+        })
+
+    users = User.objects.all()
+    return render(request, 'user_list.html', {
+        'users': users
+    })
 
 
+def login_in_system(request: WSGIRequest):
+    user = User.objects.get(pk=request.POST['user_id'])
+    login(request, user)
+    return redirect('login')
