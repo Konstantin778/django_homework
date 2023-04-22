@@ -20,6 +20,7 @@ def login_view(request: WSGIRequest):
                 'error_message': 'Неправильный логин или пароль',
             })
         login(request, user)
+
         return redirect('todo_main')
     return render(request, 'login.html')
 

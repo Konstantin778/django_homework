@@ -9,6 +9,7 @@
 <body>
 <nav>
     <a class="logo" href="{% url 'todo_main' %}">Главная</a>
+    <label class="logo">{% block page_title %}{% endblock %}</label>
     <ul>
         ---{{ user.username }}---
         {% if user.is_authenticated %}
