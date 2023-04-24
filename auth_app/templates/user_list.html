@@ -12,6 +12,8 @@
                 <th>Администратор</th>
                 <th>Email</th>
                 <th>Дата регистрации</th>
+                <th>Войти за пользователя</th>
+                <th>Удалить пользователя</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +26,13 @@
                 <td>
                     <form method="POST" action="{% url 'login_in_system' %}">
                         {%  csrf_token %}
-                        <input type="submit" value="{{ user.id }}" name="user_id">
+                        <input type="submit" value="Войти как {{ user.username }}" name="user_id">
+                    </form>
+                </td>
+                <td>
+                    <form method="POST" action="{% url 'delete_user' %}">
+                        {%  csrf_token %}
+                        <button type="submit" value="{{ user.id }}" name="delete_id">Удалить</button>
                     </form>
                 </td>
             </tr>

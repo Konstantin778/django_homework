@@ -10,7 +10,7 @@ class AuthMiddleware:
     def __call__(self, request: WSGIRequest):
         unlogin_views = (reverse('login'), reverse('registration'))
         if not request.user.is_authenticated and request.path not in unlogin_views:
-            path = request.get_raw_uri()
+            path = request.build_absolute_uri()
             login_url = reverse('login')
             return redirect(login_url + '?next=' + path)
 

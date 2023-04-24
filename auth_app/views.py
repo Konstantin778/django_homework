@@ -9,6 +9,7 @@ def login_view(request: WSGIRequest):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
+        next_page = request.GET.get('next')
 
         user: User = authenticate(
             request,
@@ -21,7 +22,12 @@ def login_view(request: WSGIRequest):
             })
         login(request, user)
 
-        return redirect('todo_main')
+        if next_page is not None:
+            return redirect(next_page)
+
+        return render(request, 'info.html', {
+            'content': 'Вы вошли в систему',
+        })
     return render(request, 'login.html')
 
 
@@ -89,3 +95,26 @@ def login_in_system(request: WSGIRequest):
     user = User.objects.get(pk=request.POST['user_id'])
     login(request, user)
     return redirect('login')
+
+
+def delete_user(request: WSGIRequest):
+    user = User.objects.get(pk=request.POST['delete_id'])
+    try:
+        user.delete()
+        return render(request, 'info.html', {
+            'content': f'Пользователь {user.username} удалён',
+        })
+
+    except User.DoesNotExist:
+        return render(request, 'user_list.html', {
+            'error_message': 'Такого пользователя не существует',
+        })
+
+    except Exception as e:
+        return render(request, 'user_list.html', {
+            'error_message': 'Ошибка сервера',
+        })
+
+    # return render(request, 'user_list.html')
+
+
