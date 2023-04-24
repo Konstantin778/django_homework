@@ -1,8 +1,7 @@
 from django.contrib import admin
 from django.urls import path
-from todo_app.views import index, bye
+from todo_app.views import index
 
 urlpatterns = [
     path('', index, name='todo_main'),
-    path('goodbye/', bye),
 ]

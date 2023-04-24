@@ -4,7 +4,7 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
-from auth_app.models import TodoStatus
+from todo_app.models import TodoStatus
 
 
 def add_data(apps, schema):
@@ -45,8 +45,8 @@ class Migration(migrations.Migration):
                 ('complete_at', models.DateTimeField(null=True)),
                 ('title', models.TextField()),
                 ('text', models.TextField()),
-                ('status', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth_app.todostatus')),
-                ('todo_list', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth_app.todolist')),
+                ('status', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todo_app.todostatus')),
+                ('todo_list', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='todo_app.todolist')),
             ],
         ),
         migrations.RunPython(add_data),
