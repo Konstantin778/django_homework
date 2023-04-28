@@ -26,5 +26,6 @@ def index(request):
             TodoTask.objects.get(pk=task_id).delete()
 
     return render(request, 'todo_main.html', {
-        'tasks_array': TodoTask.objects.all().order_by('-id')
+        'tasks_array': TodoTask.objects.all().order_by('-id'),
     })
+
