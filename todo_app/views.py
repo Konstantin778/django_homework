@@ -27,6 +27,5 @@ def index(request):
 
     return render(request, 'todo_main.html', {
         'tasks_array': TodoTask.objects.all().order_by('-id'),
-        'todo_count': len(TodoTask.objects.all()),
     })
 
