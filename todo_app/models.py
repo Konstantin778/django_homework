@@ -17,6 +17,7 @@ class TodoTask(models.Model):
     todo_list = models.ForeignKey(TodoList, models.CASCADE)
     create_at = models.DateTimeField()
     complete_at = models.DateTimeField(null=True)
+    deleted_at =models.DateTimeField(null=True)
     status = models.ForeignKey(TodoStatus, models.CASCADE)
     title = models.TextField()
     text = models.TextField()
