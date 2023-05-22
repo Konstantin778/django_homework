@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'todo_app',
     'auth_app',
+    'converter_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +59,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': ['todo_app/templates/',
-                 'auth_app/templates/'
+                 'auth_app/templates/',
+                 'converter_app/templates/',
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -131,7 +133,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'dist/'
 STATICFILES_DIRS = [
     'todo_app/static/',
-    'auth_app/static/'
+    'auth_app/static/',
+    'converter_app/static/',
     ]
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

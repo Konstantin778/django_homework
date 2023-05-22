@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'converter_app/style.css' %}">
+</head>
+<body>
+<div class="container">
+    <div class="card-header">Конвертер валют</div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="unit-control">
+                <div class="unit">
+                    <select name="from">
+                        <option value="RUB">RUB</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+                <div class="unit">
+                    <select name="to">
+                        <option value="RUB">RUB</option>
+                        <option value="EUR">EUR</option>
+                    </select>
+                </div>
+            </div>
+            <div class="converter">
+                <div class="flex-1">
+                    <div class="converter-title">Set</div>
+                    <input type="number" class="input-number" name="from_count" value="0" min="0" />
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <input type="submit" class="hidden-submit" value="Конвертировать">
+{#            <span>Конвертировать</span>#}
+        </div>
+    </form>
+    <div class="text-right flex-1">
+        <div class="converter-title">Show</div>
+        <input type="text" class="input-number text-right" name="result" value="{{ result }}" disabled/>
+    </div>
+</div>
+</body>
+</html>
